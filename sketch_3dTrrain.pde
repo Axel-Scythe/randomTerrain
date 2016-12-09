@@ -1,8 +1,8 @@
 int rows, columns;
 int scale = 20;
-int h = 600;
-int w = 600;
-int size = 500;
+int h = 1500;
+int w = 1500;
+int size = 1000;
 int sizeScale;
 
 float flying = 0;
@@ -10,7 +10,7 @@ float flying = 0;
 float[][] terrain;
 
 void setup() {
-  size(500, 500, P3D);
+  size(1000, 1000, P3D);
 
   rows = h / scale;
   columns = w / scale;
@@ -34,12 +34,12 @@ void draw() {
     yoff += 0.1;
   }
 
-  scale(2);
-  background(0);
+  //scale(2);
+  background(100, 100, 150);
   stroke(255);
   fill(50, 100, 25);
 
-  translate(width/2 - sizeScale, height/2 - sizeScale);
+  translate(width/2, height/2 - sizeScale + 50);
   rotateX(PI/3);
   translate(-w/2, -h/2);
 
@@ -51,4 +51,13 @@ void draw() {
     }
     endShape();
   }
+  
+  translate(0,0,-20);
+  fill(0, 0, 255);
+  for (int y = 0; y < rows; y++) {
+    for (int x = 0; x < columns; x++) {
+      rect(x*scale, y*scale, scale, scale);
+    }
+  }
+
 }
