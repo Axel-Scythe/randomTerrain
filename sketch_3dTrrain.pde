@@ -1,6 +1,6 @@
 int rows, columns;
 int scale = 20;
-int h = 1500;
+int h = 2000;
 int w = 1500;
 int size = 1000;
 int sizeScale;
@@ -8,6 +8,7 @@ int sizeScale;
 float flying = 0;
 
 float[][] terrain;
+
 
 void setup() {
   size(1000, 1000, P3D);
@@ -22,21 +23,23 @@ void setup() {
 
 void draw() {
 
-  flying -= 0.1;
+  lightSpecular(150, 100, 50);
+  directionalLight(255, 255, 255, -1, 0, 0);
 
+  flying -= 0.05;
   float yoff = flying;
   for (int y = 0; y < rows; y++) {
     float xoff = 0;
     for (int x = 0; x < columns; x++) {
-      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100, 100);
+      terrain[x][y] = map(noise(xoff, yoff), 0, 1, -100, 75);
       xoff += 0.1;
     }
     yoff += 0.1;
   }
 
-  //scale(2);
+  ambientLight(126, 126, 126);
   background(100, 100, 150);
-  stroke(255);
+  noStroke();
   fill(50, 100, 25);
 
   translate(width/2, height/2 - sizeScale + 50);
@@ -51,13 +54,15 @@ void draw() {
     }
     endShape();
   }
-  
-  translate(0,0,-20);
-  fill(0, 0, 255);
+
+  translate(0, 0, -20);
+
+  fill(0, 50, 255, 100);
   for (int y = 0; y < rows; y++) {
     for (int x = 0; x < columns; x++) {
+      // shininess(100);
+      // specular(100,100,100);
       rect(x*scale, y*scale, scale, scale);
     }
   }
-
 }
